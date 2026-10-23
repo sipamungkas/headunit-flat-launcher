@@ -1,0 +1,7 @@
+hu-backup-20261023/
+.superpowers/
+launcher/build/
+launcher/dist/
+launcher/keystore/
+launcher/.build/
+.DS_Store
