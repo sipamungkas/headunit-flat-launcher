@@ -5,3 +5,4 @@ launcher/dist/
 launcher/keystore/
 launcher/.build/
 .DS_Store
+projection-apps/

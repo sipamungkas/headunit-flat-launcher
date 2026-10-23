@@ -2,8 +2,11 @@ package com.headunit.flatlauncher;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,6 +26,9 @@ import java.util.List;
 public class FlatActivity extends Activity {
 
     private static final String TAG = "FlatLauncher";
+
+    private AppGridAdapter appAdapter;
+    private BroadcastReceiver packageReceiver;
 
     static class PinnedApp {
         String label;
@@ -108,23 +114,19 @@ public class FlatActivity extends Activity {
     private void setupAppGrid() {
         GridView grid = (GridView) findViewById(R.id.app_grid);
         TextView empty = (TextView) findViewById(R.id.empty_grid);
-        final AppGridAdapter adapter = new AppGridAdapter(this);
-        grid.setAdapter(adapter);
-        if (adapter.getCount() == 0) {
-            grid.setVisibility(View.GONE);
-            empty.setVisibility(View.VISIBLE);
-            return;
-        }
+        appAdapter = new AppGridAdapter(this);
+        grid.setAdapter(appAdapter);
+        updateEmptyState();
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(adapter.getItem(position).launch);
+                startActivity(appAdapter.getItem(position).launch);
             }
         });
         grid.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                final AppGridAdapter.App app = adapter.getItem(position);
+                final AppGridAdapter.App app = appAdapter.getItem(position);
                 new AlertDialog.Builder(FlatActivity.this)
                         .setTitle(app.label)
                         .setItems(new CharSequence[]{getString(R.string.app_info)},
@@ -140,6 +142,51 @@ public class FlatActivity extends Activity {
                 return true;
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (packageReceiver == null) {
+            packageReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    if (appAdapter == null || intent == null || intent.getData() == null) {
+                        return;
+                    }
+                    String pkg = intent.getData().getSchemeSpecificPart();
+                    if (getPackageName().equals(pkg)) {
+                        return;
+                    }
+                    Log.d(TAG, "package changed: " + intent.getAction() + " " + pkg);
+                    appAdapter.requery();
+                    updateEmptyState();
+                }
+            };
+            IntentFilter f = new IntentFilter();
+            f.addAction(Intent.ACTION_PACKAGE_ADDED);
+            f.addAction(Intent.ACTION_PACKAGE_REPLACED);
+            f.addAction(Intent.ACTION_PACKAGE_REMOVED);
+            f.addDataScheme("package");
+            registerReceiver(packageReceiver, f);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (packageReceiver != null) {
+            unregisterReceiver(packageReceiver);
+            packageReceiver = null;
+        }
+    }
+
+    private void updateEmptyState() {
+        GridView grid = (GridView) findViewById(R.id.app_grid);
+        TextView empty = (TextView) findViewById(R.id.empty_grid);
+        boolean isEmpty = appAdapter.getCount() == 0;
+        grid.setVisibility(isEmpty ? View.GONE : View.VISIBLE);
+        empty.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
     }
 
     private float pxToSp(float px) {

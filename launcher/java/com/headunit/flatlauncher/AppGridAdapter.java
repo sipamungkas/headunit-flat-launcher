@@ -71,6 +71,12 @@ public class AppGridAdapter extends BaseAdapter {
         });
     }
 
+    void requery() {
+        apps.clear();
+        query();
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return apps.size();
