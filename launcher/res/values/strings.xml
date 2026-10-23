@@ -5,4 +5,6 @@
     <string name="pin_media">Media</string>
     <string name="pin_bluetooth">Bluetooth</string>
     <string name="pin_maps">Maps</string>
+    <string name="empty_grid">No apps</string>
+    <string name="app_info">App info</string>
 </resources>

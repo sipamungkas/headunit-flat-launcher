@@ -1,14 +1,21 @@
 package com.headunit.flatlauncher;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +34,7 @@ public class FlatActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flat);
         buildPinnedRow(resolvePinned());
+        setupAppGrid();
     }
 
     @Override
@@ -95,6 +103,43 @@ public class FlatActivity extends Activity {
             }
             row.addView(b, lp);
         }
+    }
+
+    private void setupAppGrid() {
+        GridView grid = (GridView) findViewById(R.id.app_grid);
+        TextView empty = (TextView) findViewById(R.id.empty_grid);
+        final AppGridAdapter adapter = new AppGridAdapter(this);
+        grid.setAdapter(adapter);
+        if (adapter.getCount() == 0) {
+            grid.setVisibility(View.GONE);
+            empty.setVisibility(View.VISIBLE);
+            return;
+        }
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startActivity(adapter.getItem(position).launch);
+            }
+        });
+        grid.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                final AppGridAdapter.App app = adapter.getItem(position);
+                new AlertDialog.Builder(FlatActivity.this)
+                        .setTitle(app.label)
+                        .setItems(new CharSequence[]{getString(R.string.app_info)},
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent i = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                                Uri.fromParts("package", app.launch.getComponent().getPackageName(), null));
+                                        startActivity(i);
+                                    }
+                                })
+                        .show();
+                return true;
+            }
+        });
     }
 
     private float pxToSp(float px) {

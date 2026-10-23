@@ -49,5 +49,28 @@
         android:id="@+id/grid_container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_weight="1">
+
+        <GridView
+            android:id="@+id/app_grid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="5"
+            android:verticalSpacing="8dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:clipToPadding="false" />
+
+        <TextView
+            android:id="@+id/empty_grid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/empty_grid"
+            android:textSize="@dimen/date_size"
+            android:textColor="@color/muted"
+            android:visibility="gone" />
+    </FrameLayout>
 </LinearLayout>
