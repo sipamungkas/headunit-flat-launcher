@@ -147,6 +147,11 @@ public class FlatActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
+        // Catch package changes that happened while stopped (receiver is unregistered then).
+        if (appAdapter != null) {
+            appAdapter.requery();
+            updateEmptyState();
+        }
         if (packageReceiver == null) {
             packageReceiver = new BroadcastReceiver() {
                 @Override
