@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@color/bg">
+
+    <LinearLayout
+        android:id="@+id/left_panel"
+        android:layout_width="@dimen/panel_width"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextClock
+            android:id="@+id/clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:format24Hour="HH:mm"
+            android:format12Hour="h:mm"
+            android:fontFamily="sans-serif-light"
+            android:textSize="@dimen/clock_size"
+            android:textColor="@color/text" />
+
+        <TextClock
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:format24Hour="EEEE, d MMMM"
+            android:format12Hour="EEEE, d MMMM"
+            android:textSize="@dimen/date_size"
+            android:textColor="@color/muted" />
+
+        <LinearLayout
+            android:id="@+id/pinned_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="vertical" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/hairline" />
+
+    <FrameLayout
+        android:id="@+id/grid_container"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+</LinearLayout>

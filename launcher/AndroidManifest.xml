@@ -7,6 +7,7 @@
     <uses-sdk android:minSdkVersion="27" android:targetSdkVersion="27" />
 
     <application
+        android:icon="@drawable/ic_launcher"
         android:label="Launcher"
         android:theme="@style/Theme.Flat">
         <activity

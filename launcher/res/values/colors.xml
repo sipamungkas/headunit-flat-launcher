@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg">#101014</color>
+    <color name="text">#E8E6E3</color>
+    <color name="muted">#9A979F</color>
+    <color name="hairline">#26262B</color>
+    <color name="accent">#C8956C</color>
+</resources>

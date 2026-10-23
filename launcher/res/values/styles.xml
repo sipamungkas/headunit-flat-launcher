@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Task 1 stub: full theme values land in Task 2 -->
     <style name="Theme.Flat" parent="@android:style/Theme.Material.NoActionBar">
-        <item name="android:windowBackground">#101014</item>
-        <item name="android:statusBarColor">#101014</item>
-        <item name="android:navigationBarColor">#101014</item>
+        <item name="android:windowBackground">@color/bg</item>
+        <item name="android:statusBarColor">@color/bg</item>
+        <item name="android:navigationBarColor">@color/bg</item>
     </style>
 </resources>
