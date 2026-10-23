@@ -1,6 +1,7 @@
 package com.headunit.flatlauncher;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -10,6 +11,8 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,9 +29,19 @@ import java.util.List;
 public class FlatActivity extends Activity {
 
     private static final String TAG = "FlatLauncher";
+    private static final long STATS_INTERVAL_MS = 2000L;
 
     private AppGridAdapter appAdapter;
     private BroadcastReceiver packageReceiver;
+    private final SystemStats systemStats = new SystemStats();
+    private final Handler statsHandler = new Handler(Looper.getMainLooper());
+    private final Runnable statsTick = new Runnable() {
+        @Override
+        public void run() {
+            updateStatsLine();
+            statsHandler.postDelayed(this, STATS_INTERVAL_MS);
+        }
+    };
 
     static class PinnedApp {
         String label;
@@ -142,6 +155,46 @@ public class FlatActivity extends Activity {
                 return true;
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        statsHandler.removeCallbacks(statsTick);
+        updateStatsLine();
+        statsHandler.postDelayed(statsTick, STATS_INTERVAL_MS);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        statsHandler.removeCallbacks(statsTick);
+    }
+
+    private void updateStatsLine() {
+        TextView stats = (TextView) findViewById(R.id.stats_line);
+        if (stats == null) {
+            return;
+        }
+        SystemStats.Snapshot s = systemStats.sample(
+                (ActivityManager) getSystemService(ACTIVITY_SERVICE), System.currentTimeMillis());
+        StringBuilder sb = new StringBuilder();
+        if (s.ramTotalBytes > 0) {
+            sb.append("RAM ")
+              .append(fmtGb(s.ramUsedBytes))
+              .append('/')
+              .append(fmtGb(s.ramTotalBytes))
+              .append(" GB");
+        }
+        if (sb.length() > 0) {
+            sb.append("  ·  ");
+        }
+        sb.append("CPU ").append(s.cpuPercent >= 0 ? (s.cpuPercent + "%") : "—");
+        stats.setText(sb.toString());
+    }
+
+    private static String fmtGb(long bytes) {
+        return String.format("%.1f", bytes / 1073741824f);
     }
 
     @Override

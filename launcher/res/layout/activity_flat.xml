@@ -32,6 +32,14 @@
             android:textSize="@dimen/date_size"
             android:textColor="@color/muted" />
 
+        <TextView
+            android:id="@+id/stats_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="@dimen/stats_text"
+            android:textColor="@color/muted" />
+
         <LinearLayout
             android:id="@+id/pinned_row"
             android:layout_width="match_parent"
