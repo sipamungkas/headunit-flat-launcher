@@ -30,6 +30,7 @@ public class AppGridAdapter extends BaseAdapter {
         Intent launch;
         String pkg;
         String cls;
+        boolean restart;
     }
 
     private final Context context;
@@ -77,6 +78,17 @@ public class AppGridAdapter extends BaseAdapter {
                 return String.valueOf(l.label).compareToIgnoreCase(String.valueOf(r.label));
             }
         });
+        addRestartTile();
+    }
+
+    private void addRestartTile() {
+        App app = new App();
+        app.label = context.getString(R.string.restart_label);
+        app.icon = null;
+        app.pkg = "flat.restart";
+        app.cls = "restart";
+        app.restart = true;
+        apps.add(app);
     }
 
     void requery() {
@@ -113,10 +125,48 @@ public class AppGridAdapter extends BaseAdapter {
         plate.setBackgroundResource(hi ? R.drawable.plate_bg_hi : R.drawable.plate_bg);
         ImageView icon = (ImageView) v.findViewById(R.id.icon);
         TextView label = (TextView) v.findViewById(R.id.label);
-        icon.setImageDrawable(app.icon);
-        icon.setColorFilter(desaturate);
+        int tint = context.getResources().getColor(hi ? R.color.accent : R.color.muted);
+        Integer glyph = glyphFor(app);
+        if (glyph != null) {
+            icon.setImageResource(glyph);
+            icon.setColorFilter(tint);
+        } else {
+            icon.setImageDrawable(app.icon);
+            icon.setColorFilter(desaturate);
+        }
         label.setText(app.label);
         label.setTextColor(context.getResources().getColor(hi ? R.color.accent : R.color.text));
         return v;
+
+    }
+    private Integer glyphFor(App app) {
+        if (app.restart) {
+            return R.drawable.ic_g_restart;
+        }
+        String key = app.pkg + "/" + app.cls;
+        if ("com.google.android.apps.maps/com.google.android.maps.MapsActivity".equals(key)) return R.drawable.ic_maps;
+        if ("com.google.android.youtube/.app.honeycomb.Shell$HomeActivity".equals(key)) return R.drawable.ic_g_play;
+        if ("com.android.chrome/com.google.android.apps.chrome.Main".equals(key)) return R.drawable.ic_g_globe;
+        if ("com.android.vending/.AssetBrowserActivity".equals(key)) return R.drawable.ic_g_bag;
+        if ("com.android.settings/.Settings".equals(key)) return R.drawable.ic_g_settings;
+        if ("com.mediatek.filemanager/.FileManagerOperationActivity".equals(key)) return R.drawable.ic_g_folder;
+        if ("com.hcn.AutoMediaPlayer/com.hcn.MediaActivity.MusicPlayerUiActivity".equals(key)) return R.drawable.ic_g_audio;
+        if ("com.hcn.AutoMediaPlayer/com.hcn.MediaActivity.VideoPlayerUiActivity".equals(key)) return R.drawable.ic_g_video;
+        if ("com.autochips.bluetooth/.MainBluetoothActivity".equals(key)) return R.drawable.ic_g_bluetooth;
+        if ("com.autochips.bluetooth/.BtMusicActivity".equals(key)) return R.drawable.ic_g_audio;
+        if ("com.ankai.cardvr/.ui.GuideActivity".equals(key)) return R.drawable.ic_g_camera;
+        if ("com.auto.hcamera/.VideoInActivity".equals(key)) return R.drawable.ic_g_monitor;
+        if ("com.hcn.autoeq/.MainActivity".equals(key)) return R.drawable.ic_g_sliders;
+        if ("com.hcn.themepicker/.MainActivity".equals(key)) return R.drawable.ic_g_palette;
+        if ("com.hcn.autosetting/.ui.SettingActivity".equals(key)) return R.drawable.ic_g_car;
+        if ("com.hcn.autocan/.activity.CanActivity".equals(key)) return R.drawable.ic_g_gauge;
+        if ("com.hcn.autofan/.MainActivity".equals(key)) return R.drawable.ic_g_fan;
+        if ("com.hcn.gallery/.ui.ImageScanActivity".equals(key)) return R.drawable.ic_g_image;
+        if ("com.hcn.mcuupgrade/.UpgradeActivity".equals(key)) return R.drawable.ic_g_cpu;
+        if ("com.android.launcher3/com.android.launcher3.Launcher".equals(key)) return R.drawable.ic_g_grid;
+        if ("com.shihab.diplay/com.shilapi.xcertplay.DiPlayActivity".equals(key)) return R.drawable.ic_g_phone;
+        if ("com.andrerinas.headunitrevived/com.andrerinas.openheadunit.main.MainActivity".equals(key)) return R.drawable.ic_g_carfront;
+        if ("com.hcn.screensaver/.Main".equals(key)) return R.drawable.ic_g_image;
+        return null;
     }
 }

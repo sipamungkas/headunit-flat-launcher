@@ -10,4 +10,8 @@
     <string name="app_info">App info</string>
     <string name="ram_fmt">RAM %1$s/%2$s GB</string>
     <string name="cpu_fmt">CPU %1$d%%</string>
+    <string name="restart_label">Restart</string>
+    <string name="restart_msg">Restart the headunit now?</string>
+    <string name="restart_yes">Restart</string>
+    <string name="restart_fallback">This firmware blocks app-initiated restarts. Turn the ignition off for ~10 seconds, or use Car Settings.</string>
 </resources>
