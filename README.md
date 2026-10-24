@@ -120,6 +120,12 @@ Measured effect: the roughly 110 MB of always-running background processes (Goog
 - Launcher: `adb shell pm uninstall -k --user 0 com.headunit.flatlauncher`, or switch the default home in Settings. launcher3 is untouched.
 - Any disabled package: `adb shell cmd package install-existing <package>` (see `docs/DISABLED_PACKAGES.txt`).
 
+## License
+
+MIT. You are free to use, modify, and redistribute this launcher, including commercially. The only requirement: keep the copyright notice and credit the original author.
+
+Copyright (c) 2026 [Sipamungkas](https://sipamungkas.com)
+
 ## Credits
 
 - DiPlay (CarPlay receiver) and DiAuto (Android Auto receiver) are third-party GPL/AGPL projects by shihabal3amri and are NOT included in this repo. Their APKs were installed from official GitHub releases.
