@@ -143,31 +143,30 @@ public class AppGridAdapter extends BaseAdapter {
         if (app.restart) {
             return R.drawable.ic_g_restart;
         }
-        String key = app.pkg + "/" + app.cls;
-        if ("com.hcn.swc/.MainActivity".equals(key)) return R.drawable.ic_g_swc;
-        if ("com.google.android.apps.maps/com.google.android.maps.MapsActivity".equals(key)) return R.drawable.ic_maps;
-        if ("com.google.android.youtube/.app.honeycomb.Shell$HomeActivity".equals(key)) return R.drawable.ic_g_play;
-        if ("com.android.chrome/com.google.android.apps.chrome.Main".equals(key)) return R.drawable.ic_g_globe;
-        if ("com.android.vending/.AssetBrowserActivity".equals(key)) return R.drawable.ic_g_bag;
-        if ("com.android.settings/.Settings".equals(key)) return R.drawable.ic_g_settings;
-        if ("com.mediatek.filemanager/.FileManagerOperationActivity".equals(key)) return R.drawable.ic_g_folder;
-        if ("com.hcn.AutoMediaPlayer/com.hcn.MediaActivity.MusicPlayerUiActivity".equals(key)) return R.drawable.ic_g_audio;
-        if ("com.hcn.AutoMediaPlayer/com.hcn.MediaActivity.VideoPlayerUiActivity".equals(key)) return R.drawable.ic_g_video;
-        if ("com.autochips.bluetooth/.MainBluetoothActivity".equals(key)) return R.drawable.ic_g_bluetooth;
-        if ("com.autochips.bluetooth/.BtMusicActivity".equals(key)) return R.drawable.ic_g_audio;
-        if ("com.ankai.cardvr/.ui.GuideActivity".equals(key)) return R.drawable.ic_g_camera;
-        if ("com.auto.hcamera/.VideoInActivity".equals(key)) return R.drawable.ic_g_monitor;
-        if ("com.hcn.autoeq/.MainActivity".equals(key)) return R.drawable.ic_g_sliders;
-        if ("com.hcn.themepicker/.MainActivity".equals(key)) return R.drawable.ic_g_palette;
-        if ("com.hcn.autosetting/.ui.SettingActivity".equals(key)) return R.drawable.ic_g_car;
-        if ("com.hcn.autocan/.activity.CanActivity".equals(key)) return R.drawable.ic_g_gauge;
-        if ("com.hcn.autofan/.MainActivity".equals(key)) return R.drawable.ic_g_fan;
-        if ("com.hcn.gallery/.ui.ImageScanActivity".equals(key)) return R.drawable.ic_g_image;
-        if ("com.hcn.mcuupgrade/.UpgradeActivity".equals(key)) return R.drawable.ic_g_cpu;
-        if ("com.android.launcher3/com.android.launcher3.Launcher".equals(key)) return R.drawable.ic_g_grid;
-        if ("com.shihab.diplay/com.shilapi.xcertplay.DiPlayActivity".equals(key)) return R.drawable.ic_g_phone;
-        if ("com.andrerinas.headunitrevived/com.andrerinas.openheadunit.main.MainActivity".equals(key)) return R.drawable.ic_g_carfront;
-        if ("com.hcn.screensaver/.Main".equals(key)) return R.drawable.ic_g_image;
+        String c = app.cls == null ? "" : app.cls;
+        if ("com.google.android.apps.maps".equals(app.pkg)) return R.drawable.ic_maps;
+        if ("com.google.android.youtube".equals(app.pkg)) return R.drawable.ic_g_play;
+        if ("com.android.chrome".equals(app.pkg)) return R.drawable.ic_g_globe;
+        if ("com.android.vending".equals(app.pkg)) return R.drawable.ic_g_bag;
+        if ("com.android.settings".equals(app.pkg)) return R.drawable.ic_g_settings;
+        if ("com.mediatek.filemanager".equals(app.pkg)) return R.drawable.ic_g_folder;
+        if ("com.hcn.AutoMediaPlayer".equals(app.pkg)) return c.contains("Video") ? R.drawable.ic_g_video : R.drawable.ic_g_audio;
+        if ("com.hcn.autoradio".equals(app.pkg)) return R.drawable.ic_g_radio;
+        if ("com.autochips.bluetooth".equals(app.pkg)) return c.contains("BtMusic") ? R.drawable.ic_g_audio : R.drawable.ic_g_bluetooth;
+        if ("com.ankai.cardvr".equals(app.pkg)) return R.drawable.ic_g_camera;
+        if ("com.auto.hcamera".equals(app.pkg)) return R.drawable.ic_g_monitor;
+        if ("com.hcn.autoeq".equals(app.pkg)) return R.drawable.ic_g_sliders;
+        if ("com.hcn.themepicker".equals(app.pkg)) return R.drawable.ic_g_palette;
+        if ("com.hcn.autosetting".equals(app.pkg)) return R.drawable.ic_g_car;
+        if ("com.hcn.autocan".equals(app.pkg)) return R.drawable.ic_g_gauge;
+        if ("com.hcn.autofan".equals(app.pkg)) return R.drawable.ic_g_fan;
+        if ("com.hcn.gallery".equals(app.pkg)) return R.drawable.ic_g_image;
+        if ("com.hcn.mcuupgrade".equals(app.pkg)) return R.drawable.ic_g_cpu;
+        if ("com.android.launcher3".equals(app.pkg)) return R.drawable.ic_g_grid;
+        if ("com.hcn.swc".equals(app.pkg)) return R.drawable.ic_g_swc;
+        if ("com.hcn.screensaver".equals(app.pkg)) return R.drawable.ic_g_image;
+        if ("com.shihab.diplay".equals(app.pkg)) return R.drawable.ic_g_phone;
+        if ("com.andrerinas.headunitrevived".equals(app.pkg)) return R.drawable.ic_g_carfront;
         return null;
     }
 }
