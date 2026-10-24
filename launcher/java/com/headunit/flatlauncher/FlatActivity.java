@@ -67,6 +67,12 @@ public class FlatActivity extends Activity {
     }
 
     @Override
+    public void onBackPressed() {
+        // Home has no back stack; absorbing BACK prevents the firmware's
+        // slide-down overlay that cannot be dismissed under immersive mode.
+    }
+
+    @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
