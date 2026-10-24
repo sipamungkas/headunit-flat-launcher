@@ -115,11 +115,8 @@ public class FlatActivity extends Activity {
         List<PinnedApp> out = new ArrayList<PinnedApp>();
         pin(out, getString(R.string.pin_radio), pm.getLaunchIntentForPackage("com.hcn.autoradio"), R.drawable.ic_radio);
         pin(out, getString(R.string.pin_media), pm.getLaunchIntentForPackage("com.hcn.AutoMediaPlayer"), R.drawable.ic_music);
-        // Pin opens the BT MUSIC source app (BtMusicActivity), not the BT phone UI
-        // (MainBluetoothActivity): firmware routes A2DP audio only while it is active.
-        Intent btMusic = new Intent();
-        btMusic.setClassName("com.autochips.bluetooth", "com.autochips.bluetooth.BtMusicActivity");
-        pin(out, getString(R.string.pin_bluetooth), btMusic.resolveActivity(pm) != null ? btMusic : null, R.drawable.ic_bluetooth);
+        // Pin opens the Bluetooth app (MainBluetoothActivity, package default).
+        pin(out, getString(R.string.pin_bluetooth), pm.getLaunchIntentForPackage("com.autochips.bluetooth"), R.drawable.ic_bluetooth);
         pin(out, getString(R.string.pin_maps), pm.getLaunchIntentForPackage("com.google.android.apps.maps"), R.drawable.ic_maps);
         return out;
     }
@@ -190,8 +187,8 @@ public class FlatActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AppGridAdapter.App app = appAdapter.getItem(position);
-                prefs.edit().putString(KEY_LAST_APP, app.pkg).apply();
-                appAdapter.setHighlight(app.pkg);
+                prefs.edit().putString(KEY_LAST_APP, app.pkg + "/" + app.cls).apply();
+                appAdapter.setHighlight(app.pkg + "/" + app.cls);
                 startActivity(app.launch);
             }
         });

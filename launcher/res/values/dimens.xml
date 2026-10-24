@@ -9,6 +9,7 @@
     <dimen name="chip_text_size">12sp</dimen>
     <dimen name="grid_icon">26dp</dimen>
     <dimen name="grid_plate">56dp</dimen>
+    <dimen name="grid_tile_height">185dp</dimen>
     <dimen name="grid_label">12sp</dimen>
     <dimen name="stats_text">13sp</dimen>
 </resources>

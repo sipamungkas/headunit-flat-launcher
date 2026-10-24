@@ -29,12 +29,13 @@ public class AppGridAdapter extends BaseAdapter {
         Drawable icon;
         Intent launch;
         String pkg;
+        String cls;
     }
 
     private final Context context;
     private final List<App> apps = new ArrayList<App>();
     private final ColorMatrixColorFilter desaturate;
-    private String highlightPkg;
+    private String highlightKey;
 
     AppGridAdapter(Context ctx) {
         context = ctx;
@@ -44,8 +45,8 @@ public class AppGridAdapter extends BaseAdapter {
         query();
     }
 
-    void setHighlight(String pkg) {
-        highlightPkg = pkg;
+    void setHighlight(String key) {
+        highlightKey = key;
         notifyDataSetChanged();
     }
 
@@ -64,12 +65,10 @@ public class AppGridAdapter extends BaseAdapter {
             app.label = ri.loadLabel(pm);
             app.icon = ri.loadIcon(pm);
             app.pkg = ri.activityInfo.packageName;
-            app.launch = pm.getLaunchIntentForPackage(app.pkg);
-            if (app.launch == null) {
-                app.launch = new Intent(Intent.ACTION_MAIN)
-                        .addCategory(Intent.CATEGORY_LAUNCHER)
-                        .setClassName(app.pkg, ri.activityInfo.name);
-            }
+            app.cls = ri.activityInfo.name;
+            app.launch = new Intent(Intent.ACTION_MAIN)
+                    .addCategory(Intent.CATEGORY_LAUNCHER)
+                    .setClassName(app.pkg, app.cls);
             apps.add(app);
         }
         Collections.sort(apps, new Comparator<App>() {
@@ -108,7 +107,7 @@ public class AppGridAdapter extends BaseAdapter {
             v = LayoutInflater.from(context).inflate(R.layout.grid_item, parent, false);
         }
         App app = getItem(position);
-        boolean hi = app.pkg != null && app.pkg.equals(highlightPkg);
+        boolean hi = app.pkg != null && (app.pkg + "/" + app.cls).equals(highlightKey);
         v.setBackgroundResource(hi ? R.drawable.tile_card_bg_hi : R.drawable.tile_card_bg);
         FrameLayout plate = (FrameLayout) v.findViewById(R.id.plate);
         plate.setBackgroundResource(hi ? R.drawable.plate_bg_hi : R.drawable.plate_bg);

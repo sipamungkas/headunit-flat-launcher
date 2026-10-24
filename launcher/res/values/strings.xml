@@ -3,7 +3,7 @@
     <string name="app_name">Launcher</string>
     <string name="pin_radio">Radio</string>
     <string name="pin_media">Media</string>
-    <string name="pin_bluetooth">BT Music</string>
+    <string name="pin_bluetooth">Bluetooth</string>
     <string name="pin_maps">Maps</string>
     <string name="empty_grid">No apps</string>
     <string name="apps_label">APPS</string>

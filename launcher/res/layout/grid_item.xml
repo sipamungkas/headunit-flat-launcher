@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="@dimen/grid_tile_height"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:background="@drawable/tile_card_bg"
-    android:paddingTop="12dp"
-    android:paddingBottom="12dp">
+    android:gravity="center"
+    android:background="@drawable/tile_card_bg">
 
     <FrameLayout
         android:id="@+id/plate"
@@ -25,7 +23,7 @@
         android:id="@+id/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         android:maxLines="1"
         android:ellipsize="end"
         android:textSize="@dimen/grid_label"
