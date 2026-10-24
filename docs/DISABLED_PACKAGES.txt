@@ -1,0 +1,119 @@
+# Disabled packages — 2026-10-24
+# Method: pm uninstall -k --user 0 <pkg>  ( reversible: cmd package install-existing <pkg> )
+# APKs backed up in this directory (92 files) and on device at /sdcard/hu-backup-20261023/
+# Kept alive on purpose: com.android.launcher3, com.hcn.themepicker, com.hcn.auto.theme.first
+
+## HCN vendor themes (56)
+com.hcn.auto.theme.a180
+com.hcn.auto.theme.a181
+com.hcn.auto.theme.g1
+com.hcn.auto.theme.g11
+com.hcn.auto.theme.g41
+com.hcn.auto.theme.g51
+com.hcn.auto.theme.md03_n
+com.hcn.auto.theme.xt01
+com.hcn.auto.theme.xt02
+com.hcn.auto.theme.xt03
+com.hcn.auto.theme.xt04
+com.hcn.auto.theme.xt04_n
+com.hcn.auto.theme.xt05
+com.hcn.auto.theme.xt06
+com.hcn.auto.theme.xt07
+com.hcn.auto.theme.xt08
+com.hcn.auto.theme.xt09
+com.hcn.auto.theme.xt10
+com.hcn.auto.theme.xt103
+com.hcn.auto.theme.xt11
+com.hcn.auto.theme.xt112
+com.hcn.auto.theme.xt11_n
+com.hcn.auto.theme.xt12
+com.hcn.auto.theme.xt13
+com.hcn.auto.theme.xt14
+com.hcn.auto.theme.xt144
+com.hcn.auto.theme.xt15
+com.hcn.auto.theme.xt16
+com.hcn.auto.theme.xt17
+com.hcn.auto.theme.xt18
+com.hcn.auto.theme.xt183
+com.hcn.auto.theme.xt188
+com.hcn.auto.theme.xt19
+com.hcn.auto.theme.xt20
+com.hcn.auto.theme.xt24
+com.hcn.auto.theme.xt25
+com.hcn.auto.theme.xt265
+com.hcn.auto.theme.xt266
+com.hcn.auto.theme.xt267
+com.hcn.auto.theme.xt27
+com.hcn.auto.theme.xt28
+com.hcn.auto.theme.xt29
+com.hcn.auto.theme.xt35
+com.hcn.auto.theme.xt36
+com.hcn.auto.theme.xt37
+com.hcn.auto.theme.xt375
+com.hcn.auto.theme.xt38
+com.hcn.auto.theme.xt416
+com.hcn.auto.theme.xt50
+com.hcn.auto.theme.xt51
+com.hcn.auto.theme.xt52
+com.hcn.auto.theme.xt536
+com.hcn.auto.theme.xt55
+com.hcn.auto.theme.xt70
+com.hcn.auto.theme.xt71
+com.hcn.auto.theme.xt88
+com.hcn.auto.theme.xt99
+
+## Firmware OTA updaters (3)
+com.adups.fota
+com.adups.fota.sysoper
+com.abfota.systemUpdate
+
+## Vendor updaters/guides (4)
+com.hcn.autoupdate
+com.hcn.appupdate
+com.hcn.canupgrade
+com.hcn.autouserguide
+
+## MediaTek logging/engineering (8)
+com.mediatek.mtklogger
+com.mediatek.mtklogger.proxy
+com.mediatek.atci.service
+com.mediatek.engineermode
+com.mediatek.ygps
+com.mediatek.calendarimporter
+com.mediatek.op.phone.plugin
+com.mediatek.bluetooth.dtt
+
+## AOSP wallpaper/easter-egg/misc (9)
+com.android.galaxy4
+com.android.wallpaper.holospiral
+com.android.wallpaper.livepicker
+com.android.wallpaperpicker
+com.android.wallpaperbackup
+com.android.wallpapercropper
+com.android.bluetoothmidiservice
+com.android.smspush
+com.android.statementservice
+
+## Google helper/bloat (7)
+com.google.android.printservice.recommendation
+com.google.android.feedback
+com.google.android.onetimeinitializer
+com.google.android.partnersetup
+com.google.android.syncadapters.contacts
+com.google.android.apps.pdfviewer
+com.google.android.googlequicksearchbox
+
+## User-installed bloat (1)
+com.netflix.mediaclient
+
+## Removed on request (1)
+com.tima.carnet.vt          # "phonelink" — Korean phone-car link service (TiMA carnet v3.11),
+                            # useless outside Korea; superseded by DiAuto/DiPlay.
+                            # APK: com.tima.carnet.vt.apk in this directory.
+
+## Other settings applied
+# animations: window/transition/animator = 0.5
+# appops RUN_IN_BACKGROUND=ignore: com.google.android.youtube, com.android.chrome,
+#   com.google.android.apps.maps, com.android.vending
+# pm trim-caches, am kill-all
+# MemAvailable: 407 MB -> 524 MB (pre-reboot)
