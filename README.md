@@ -2,6 +2,11 @@
 
 A custom, minimal home screen (launcher) for cheap Android 8.1 car head units (8227L / MT8227L class hardware), plus the debloat and tuning notes from the full setup. Designed first on the [pencil.dev](https://pencil.dev) canvas (`design/hud design.pen`), then implemented with **zero dependencies**: no Gradle, no AndroidX, no Compose. Just framework views and a 40-line build script.
 
+> **LICENSE: MIT. Read this before you copy anything.**
+> You are free to use, modify, fork, and redistribute this project, including commercially.
+> **The one condition: you MUST keep the MIT license text and the copyright notice (`Copyright (c) 2026 Sipamungkas`) in your copy.** That means keeping the `LICENSE` file, and ideally crediting [sipamungkas.com](https://sipamungkas.com) in your README too. Removing or replacing the license is a violation of it.
+> See [LICENSE](LICENSE) and the [License section](#license) below.
+
 ![Home screen](design/flat-launcher-home.png)
 
 ## The hardware it targets
