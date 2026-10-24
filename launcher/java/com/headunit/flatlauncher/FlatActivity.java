@@ -42,6 +42,7 @@ public class FlatActivity extends Activity {
     private final Handler statsHandler = new Handler(Looper.getMainLooper());
     private SharedPreferences prefs;
     private TextView ampmPill;
+    private BroadcastReceiver btPlayReceiver;
 
     private final Runnable statsTick = new Runnable() {
         @Override
@@ -50,7 +51,34 @@ public class FlatActivity extends Activity {
             statsHandler.postDelayed(this, STATS_INTERVAL_MS);
         }
     };
-
+    private void setupBtAutoSource() {
+        btPlayReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+                int state = intent.getIntExtra("android.bluetooth.profile.extra.STATE", -1);
+                Log.d(TAG, "bt event: " + action + " state=" + state);
+                boolean connect = "android.bluetooth.device.action.ACL_CONNECTED".equals(action)
+                        || state == 2;
+                if (!connect) {
+                    return;
+                }
+                Intent i = new Intent();
+                i.setClassName("com.autochips.bluetooth", "com.autochips.bluetooth.BtMusicActivity");
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                try {
+                    startActivity(i);
+                } catch (RuntimeException e) {
+                    Log.d(TAG, "cannot start BT music source: " + e);
+                }
+            }
+        };
+        IntentFilter f = new IntentFilter();
+        f.addAction("android.bluetooth.device.action.ACL_CONNECTED");
+        f.addAction("android.bluetooth.a2dp-sink.profile.action.CONNECTION_STATE_CHANGED");
+        f.addAction("android.bluetooth.a2dp.profile.action.CONNECTION_STATE_CHANGED");
+        registerReceiver(btPlayReceiver, f);
+    }
     static class PinnedApp {
         String label;
         Intent intent;
@@ -65,6 +93,7 @@ public class FlatActivity extends Activity {
         buildPinnedRow(resolvePinned());
         setupAppGrid();
         ampmPill = (TextView) findViewById(R.id.ampm_pill);
+        setupBtAutoSource();
     }
 
     @Override
