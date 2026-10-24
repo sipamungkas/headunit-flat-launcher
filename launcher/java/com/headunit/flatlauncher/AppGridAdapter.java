@@ -131,8 +131,8 @@ public class AppGridAdapter extends BaseAdapter {
             icon.setImageResource(glyph);
             icon.setColorFilter(tint);
         } else {
-            icon.setImageDrawable(app.icon);
-            icon.setColorFilter(desaturate);
+            icon.setImageResource(R.drawable.ic_g_app);
+            icon.setColorFilter(tint);
         }
         label.setText(app.label);
         label.setTextColor(context.getResources().getColor(hi ? R.color.accent : R.color.text));
@@ -144,6 +144,7 @@ public class AppGridAdapter extends BaseAdapter {
             return R.drawable.ic_g_restart;
         }
         String key = app.pkg + "/" + app.cls;
+        if ("com.hcn.swc/.MainActivity".equals(key)) return R.drawable.ic_g_swc;
         if ("com.google.android.apps.maps/com.google.android.maps.MapsActivity".equals(key)) return R.drawable.ic_maps;
         if ("com.google.android.youtube/.app.honeycomb.Shell$HomeActivity".equals(key)) return R.drawable.ic_g_play;
         if ("com.android.chrome/com.google.android.apps.chrome.Main".equals(key)) return R.drawable.ic_g_globe;
