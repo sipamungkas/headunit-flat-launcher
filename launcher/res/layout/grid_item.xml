@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:padding="10dp">
+    android:background="@drawable/tile_card_bg"
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp">
 
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="@dimen/grid_icon"
-        android:layout_height="@dimen/grid_icon" />
+    <FrameLayout
+        android:id="@+id/plate"
+        android:layout_width="@dimen/grid_plate"
+        android:layout_height="@dimen/grid_plate"
+        android:background="@drawable/plate_bg">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/grid_icon"
+            android:layout_height="@dimen/grid_icon"
+            android:layout_gravity="center" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="10dp"
         android:maxLines="1"
         android:ellipsize="end"
         android:textSize="@dimen/grid_label"
-        android:textColor="@color/muted" />
+        android:textColor="@color/text" />
 </LinearLayout>

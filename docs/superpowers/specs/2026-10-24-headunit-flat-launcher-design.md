@@ -64,3 +64,13 @@ App icons desaturated to ~25% saturation via `ColorMatrixColorFilter`; labels so
 ## Rollback
 
 - `pm uninstall -k --user 0 com.headunit.flatlauncher` (or disable) restores launcher3 as HOME.
+
+## v2 polish (2026-10-24, approved from Pencil mock)
+
+Same layout bones; visual refresh ported from the approved pen.dev design (frame "HUD Home"):
+
+- Colors: bg `#0B0B0F` + faint radial glow (layer-list), surface `#15151B`, icon plate `#1B1B22`, hairline `#26262B`, text `#F0EEE9`, muted `#8E8B94`, accent `#C8956C`.
+- Rail (300dp): clock 92sp + AM/PM pill chip (hidden in 24h), date, RAM + CPU chips (vector icons), spacer, 4 pinned rows with icons (radio/music/BT/maps).
+- Divider: 1dp vertical gradient fading at both ends.
+- Apps area: "APPS" + count header; 5-column grid of tile cards (rounded 14, surface, hairline stroke) each with 56dp icon plate + desaturated icon + label; last-launched tile gets amber stroke/plate/label (persisted in prefs `last_app`).
+- Vectors are original geometric glyphs; no external assets.

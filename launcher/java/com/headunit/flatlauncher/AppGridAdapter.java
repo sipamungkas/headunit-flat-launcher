@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,11 +28,13 @@ public class AppGridAdapter extends BaseAdapter {
         CharSequence label;
         Drawable icon;
         Intent launch;
+        String pkg;
     }
 
     private final Context context;
     private final List<App> apps = new ArrayList<App>();
     private final ColorMatrixColorFilter desaturate;
+    private String highlightPkg;
 
     AppGridAdapter(Context ctx) {
         context = ctx;
@@ -39,6 +42,11 @@ public class AppGridAdapter extends BaseAdapter {
         m.setSaturation(0.25f);
         desaturate = new ColorMatrixColorFilter(m);
         query();
+    }
+
+    void setHighlight(String pkg) {
+        highlightPkg = pkg;
+        notifyDataSetChanged();
     }
 
     private void query() {
@@ -55,11 +63,12 @@ public class AppGridAdapter extends BaseAdapter {
             App app = new App();
             app.label = ri.loadLabel(pm);
             app.icon = ri.loadIcon(pm);
-            app.launch = pm.getLaunchIntentForPackage(ri.activityInfo.packageName);
+            app.pkg = ri.activityInfo.packageName;
+            app.launch = pm.getLaunchIntentForPackage(app.pkg);
             if (app.launch == null) {
                 app.launch = new Intent(Intent.ACTION_MAIN)
                         .addCategory(Intent.CATEGORY_LAUNCHER)
-                        .setClassName(ri.activityInfo.packageName, ri.activityInfo.name);
+                        .setClassName(app.pkg, ri.activityInfo.name);
             }
             apps.add(app);
         }
@@ -99,11 +108,16 @@ public class AppGridAdapter extends BaseAdapter {
             v = LayoutInflater.from(context).inflate(R.layout.grid_item, parent, false);
         }
         App app = getItem(position);
+        boolean hi = app.pkg != null && app.pkg.equals(highlightPkg);
+        v.setBackgroundResource(hi ? R.drawable.tile_card_bg_hi : R.drawable.tile_card_bg);
+        FrameLayout plate = (FrameLayout) v.findViewById(R.id.plate);
+        plate.setBackgroundResource(hi ? R.drawable.plate_bg_hi : R.drawable.plate_bg);
         ImageView icon = (ImageView) v.findViewById(R.id.icon);
         TextView label = (TextView) v.findViewById(R.id.label);
         icon.setImageDrawable(app.icon);
         icon.setColorFilter(desaturate);
         label.setText(app.label);
+        label.setTextColor(context.getResources().getColor(hi ? R.color.accent : R.color.text));
         return v;
     }
 }

@@ -6,5 +6,8 @@
     <string name="pin_bluetooth">Bluetooth</string>
     <string name="pin_maps">Maps</string>
     <string name="empty_grid">No apps</string>
+    <string name="apps_label">APPS</string>
     <string name="app_info">App info</string>
+    <string name="ram_fmt">RAM %1$s/%2$s GB</string>
+    <string name="cpu_fmt">CPU %1$d%%</string>
 </resources>
