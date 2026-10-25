@@ -139,6 +139,10 @@ The one honest gray area: DiPlay is an *uncertified* CarPlay receiver (Apple has
 
 This is a technical explanation, not legal advice.
 
+> ⚠️ **Warning for every user: read the terms and conditions that came with YOUR head unit before doing any of this.**
+> The reasoning above applies to this specific unit (generic uncertified 8227L, no vendor agreement, no subscription services). Your unit may be different: some brands tie their firmware, maps, connectivity, or warranty to terms that prohibit removing preinstalled apps, replacing the launcher, or enabling developer options. Violating those terms can void your warranty or get services revoked, and on certified devices the stakes are higher.
+> Check your unit's T&C (and your car's, if it is factory-fitted) before running anything from this repo. You modify at your own risk.
+
 ## License
 
 MIT. You are free to use, modify, and redistribute this launcher, including commercially. The only requirement: keep the copyright notice and credit the original author.
