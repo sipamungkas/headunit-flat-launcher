@@ -125,6 +125,20 @@ Measured effect: the roughly 110 MB of always-running background processes (Goog
 - Launcher: `adb shell pm uninstall -k --user 0 com.headunit.flatlauncher`, or switch the default home in Settings. launcher3 is untouched.
 - Any disabled package: `adb shell cmd package install-existing <package>` (see `docs/DISABLED_PACKAGES.txt`).
 
+## Does this violate any terms and conditions?
+
+Short answer: no. This project is a different category from similar scripts that get flagged for ToS violations on Google-certified devices. Here is the reasoning:
+
+1. **There is no certification to lose.** The 8227L is an uncertified aftermarket head unit. The vendor sideloaded Google services informally. Nothing here touches a certification state, because there is none to protect. (Scripts that strip ads and Google services from certified Android TV / Google TV devices can trigger device decertification: Widevine drops to L3, DRM apps stop working. That mechanism simply does not apply to this hardware.)
+2. **No circumvention.** This project does not block ads, spoof device identity, bypass DRM, or defeat any security mechanism. Disabling apps is done with `pm uninstall -k --user 0`, Android's own supported per-user mechanism, equivalent to the uninstall button the vendor chose not to show you.
+3. **The system partition is untouched.** Every change lives in user space (`/data`). No root was used or needed. The system is byte-identical to factory.
+4. **Everything is reversible.** Any disabled package restores with `cmd package install-existing <package>`. The launcher uninstalls like any app, and the stock launcher3 was never removed.
+5. **The added software is legitimate.** The launcher is original code (MIT, this repo). DiPlay and DiAuto are open-source receivers installed from their official releases.
+
+The one honest gray area: DiPlay is an *uncertified* CarPlay receiver (Apple has not authorized it, and a future iOS update can break it). That is a disclosure from the upstream project, not a violation caused by anything here, and it is entirely optional to use.
+
+This is a technical explanation, not legal advice.
+
 ## License
 
 MIT. You are free to use, modify, and redistribute this launcher, including commercially. The only requirement: keep the copyright notice and credit the original author.
