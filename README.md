@@ -127,7 +127,7 @@ Measured effect: the roughly 110 MB of always-running background processes (Goog
 
 ## Does this violate any terms and conditions?
 
-Short answer: no. This project is a different category from similar scripts that get flagged for ToS violations on Google-certified devices. Here is the reasoning:
+Short answer: no. This project is a different category from scripts that strip services from Google-certified TV devices, which get flagged for ToS violations. Here is the reasoning:
 
 1. **There is no certification to lose.** The 8227L is an uncertified aftermarket head unit. The vendor sideloaded Google services informally. Nothing here touches a certification state, because there is none to protect. (Scripts that strip ads and Google services from certified Android TV / Google TV devices can trigger device decertification: Widevine drops to L3, DRM apps stop working. That mechanism simply does not apply to this hardware.)
 2. **No circumvention.** This project does not block ads, spoof device identity, bypass DRM, or defeat any security mechanism. Disabling apps is done with `pm uninstall -k --user 0`, Android's own supported per-user mechanism, equivalent to the uninstall button the vendor chose not to show you.
